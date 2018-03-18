@@ -1,0 +1,373 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="Pakadlo, Entertainment Factory, Sports, Movies and Songs, All in one">
+<meta name="description" content="Pakadlo - Entertainment Factory, is an initiative by Wavedevelopers - Own the World! (http://www.wavedevelopers.com) to provide complete entertainment and information at single place. We have listed sports factory, movies factory and songs factory for the beginning."/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title itemprop='name'>Pakadlo - Entertainment Factory!</title>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<style>
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #15181A;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.skw-pages {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+}
+
+.skw-page {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.skw-page__half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100vh;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+.skw-page__half--left {
+  left: 0;
+  -webkit-transform: translate3d(-32.4vh, 100%, 0);
+          transform: translate3d(-32.4vh, 100%, 0);
+}
+.skw-page__half--right {
+  left: 50%;
+  -webkit-transform: translate3d(32.4vh, -100%, 0);
+          transform: translate3d(32.4vh, -100%, 0);
+}
+.skw-page.active .skw-page__half {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.skw-page__skewed {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 140%;
+  height: 100%;
+  -webkit-transform: skewX(-18deg);
+          transform: skewX(-18deg);
+  background: #000;
+}
+.skw-page__half--left .skw-page__skewed {
+  left: -40%;
+}
+.skw-page__half--right .skw-page__skewed {
+  right: -40%;
+}
+.skw-page__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 30%;
+  color: #fff;
+  -webkit-transform: skewX(18deg);
+          transform: skewX(18deg);
+  -webkit-transition: opacity 1s, -webkit-transform 1s;
+  transition: opacity 1s, -webkit-transform 1s;
+  transition: transform 1s, opacity 1s;
+  transition: transform 1s, opacity 1s, -webkit-transform 1s;
+  background-size: cover;
+}
+.skw-page__half--left .skw-page__content {
+  padding-left: 30%;
+  padding-right: 30%;
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+}
+.skw-page__half--right .skw-page__content {
+  padding-left: 30%;
+  padding-right: 30%;
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+}
+.skw-page.inactive .skw-page__content {
+  opacity: 0.5;
+  -webkit-transform: skewX(18deg) scale(0.95);
+          transform: skewX(18deg) scale(0.95);
+}
+.skw-page__heading {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 25px;
+  text-align: center;
+}
+.skw-page__description {
+  font-size: 18px;
+  text-align: center;
+}
+.skw-page__link {
+  color: #FFA0A0;
+}
+.skw-page-1 .skw-page__half--left .skw-page__content {
+  background-image: url("image/hot-air.jpg");
+}
+.skw-page-1 .skw-page__half--right .skw-page__content {
+  background: #292929;
+}
+.skw-page-2 .skw-page__half--left .skw-page__content {
+  background: #292929;
+}
+.skw-page-2 .skw-page__half--right .skw-page__content {
+  background-image: url("image/sports.jpg");
+}
+.skw-page-3 .skw-page__half--left .skw-page__content {
+  background-image: url("image/cinema.jpg");
+}
+.skw-page-3 .skw-page__half--right .skw-page__content {
+  background: #292929;
+}
+.skw-page-4 .skw-page__half--left .skw-page__content {
+  background: #292929;
+}
+.skw-page-4 .skw-page__half--right .skw-page__content {
+  background-image: url("image/music.jpg");
+}
+.skw-page-5 .skw-page__half--left .skw-page__content {
+  background-image: url("image/wavedevelopers.jpg");
+}
+.skw-page-5 .skw-page__half--right .skw-page__content {
+  background: #292929;
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  var curPage = 1;
+  var numOfPages = $(".skw-page").length;
+  var animTime = 1000;
+  var scrolling = false;
+  var pgPrefix = ".skw-page-";
+
+  function pagination() {
+    scrolling = true;
+
+    $(pgPrefix + curPage)
+      .removeClass("inactive")
+      .addClass("active");
+    $(pgPrefix + (curPage - 1)).addClass("inactive");
+    $(pgPrefix + (curPage + 1)).removeClass("active");
+
+    setTimeout(function() {
+      scrolling = false;
+    }, animTime);
+  }
+
+  function navigateUp() {
+    if (curPage === 1) return;
+    curPage--;
+    pagination();
+  }
+
+  function navigateDown() {
+    if (curPage === numOfPages) return;
+    curPage++;
+    pagination();
+  }
+
+  $(document).on("mousewheel DOMMouseScroll", function(e) {
+    if (scrolling) return;
+    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+      navigateUp();
+    } else {
+      navigateDown();
+    }
+  });
+
+  $(document).on("keydown", function(e) {
+    if (scrolling) return;
+    if (e.which === 38) {
+      navigateUp();
+    } else if (e.which === 40) {
+      navigateDown();
+    }
+  });
+});
+
+</script>
+<style>
+#section10 a {
+	padding-top: 60px;
+}
+#section10 a span {
+	position: absolute;
+	bottom: 10%;
+	left: 50%;
+	width: 30px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #fff;
+	border-radius: 50px;
+	box-sizing: border-box;
+}
+#section10 a span::before {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	content: "";
+	width: 6px;
+	height: 6px;
+	margin-left: -3px;
+	background-color: #fff;
+	border-radius: 100%;
+	-webkit-animation: sdb10 2s infinite;
+	animation: sdb10 2s infinite;
+	box-sizing: border-box;
+}
+@-webkit-keyframes sdb10 {
+	0% {
+		-webkit-transform: translate(0, 0);
+		opacity: 0;
+	}
+	40% {
+		opacity: 1;
+	}
+	80% {
+		-webkit-transform: translate(0, 20px);
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes sdb10 {
+	0% {
+		transform: translate(0, 0);
+		opacity: 0;
+	}
+	40% {
+		opacity: 1;
+	}
+	80% {
+		transform: translate(0, 20px);
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+</style>
+</head>
+<body>
+<div class="skw-pages">
+  <div class="skw-page skw-page-1 active">
+    <div class="skw-page__half skw-page__half--left">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content"></div>
+      </div>
+    </div>
+    <div class="skw-page__half skw-page__half--right">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content">
+          <h2 class="skw-page__heading">Entertainment Factory</h2>
+          <p class="skw-page__description">Welcome, you've arrived!</p>
+        </div>
+      </div>
+	<section id="section10" class="demo">
+		<h1></h1>
+		<a href="#"><span></span></a>
+	</section>
+    </div>
+  </div>
+  <div class="skw-page skw-page-2">
+    <div class="skw-page__half skw-page__half--left">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content">
+          <h2 class="skw-page__heading">Sports</h2>
+          <p class="skw-page__description">Nothing to do here, continue scrolling.</p>
+        </div>
+      </div>
+    </div>
+    <div class="skw-page__half skw-page__half--right">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content"></div>
+      </div>
+    </div>
+  </div>
+  <div class="skw-page skw-page-3">
+    <div class="skw-page__half skw-page__half--left">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content"></div>
+      </div>
+    </div>
+    <div class="skw-page__half skw-page__half--right">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content">
+          <h2 class="skw-page__heading">Movies</h2>
+          <p class="skw-page__description">The end is near, I promise!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="skw-page skw-page-4">
+    <div class="skw-page__half skw-page__half--left">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content">
+          <h2 class="skw-page__heading">Music</h2>
+          <p class="skw-page__description">Ok, ok, just one more scroll!</p>
+        </div>
+      </div>
+    </div>
+    <div class="skw-page__half skw-page__half--right">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content"></div>
+      </div>
+    </div>
+  </div>
+  <div class="skw-page skw-page-5">
+    <div class="skw-page__half skw-page__half--left">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content"></div>
+      </div>
+    </div>
+    <div class="skw-page__half skw-page__half--right">
+      <div class="skw-page__skewed">
+        <div class="skw-page__content">
+          <h2 class="skw-page__heading">And we are</h2>
+          <p class="skw-page__description">
+            Feel free to check 
+            <a class="skw-page__link" href="http://www.wavedevelopers.com" target="_blank">our website</a>. We build products to amaze and help people all around the world.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
